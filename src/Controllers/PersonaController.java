@@ -9,11 +9,21 @@ public class PersonaController {
     /**
      * Método para ordenar un arreglo de Persona por edad utilizando el algoritmo de
      * inserscion .
-     * 
      * @param personas Array de Persona a ordenar.
      */
+
     public void ordenarPorEdad(Persona[] personas) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        int tam = personas.length;
+        for (int i = 1; i < tam; i++) {
+            Persona aux = personas[i];
+            int j = i - 1;
+
+            while (j >= 0 && aux.getEdad() < personas[j].getEdad()) { 
+                personas[j + 1] = personas[j];
+                j = j - 1;
+            }
+            personas[j + 1] = aux;
+        }
     }
 
     /**
@@ -26,7 +36,21 @@ public class PersonaController {
      *         encuentra.
      */
     public Persona buscarPorEdad(Persona[] personas, int edad) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        int inicio = 0;
+        int fin = personas.length - 1;
+        
+        while (inicio <= fin){
+            int medio = inicio + (fin - inicio) / 2 ;
 
+            if (personas[medio].getEdad() == edad){
+                return personas[medio];
+            }
+            if (personas[medio].getEdad() < edad ) {
+                inicio = medio + 1;
+            } else{
+                fin = medio - 1;
+            }
+        }
+        return null;
     }
 }
